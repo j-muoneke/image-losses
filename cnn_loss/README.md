@@ -1,6 +1,6 @@
 # CNN Loss Package
 
-This package contains a PyTorch implementation of a Convolutional Neural Network (CNN) Loss class designed for image-based neural networks. 
+This package contains a PyTorch implementation of a Convolutional Neural Network (CNN) Loss class designed for image-based neural networks.
 The CNN Loss is a learning perceptual loss metric. It achieves this with layers from a trained ResNet model.
 
 ## Contents
