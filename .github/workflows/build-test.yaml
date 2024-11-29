@@ -25,6 +25,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         find -mindepth 1 -maxdepth 1 -type d -not -path '*/[@.]*' | xargs pip install
+        pip install pytest
 
     - name: Run Python Tests
       run: |
