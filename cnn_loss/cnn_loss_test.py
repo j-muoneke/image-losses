@@ -44,6 +44,25 @@ def test_cnn_loss_forward() -> None:
     assert loss.dtype == th.float32
     assert th.isfinite(loss)
 
+@pytest.mark.skipif(not th.cuda.is_available(), reason="CUDA device not available")
+def test_cnn_loss_forward_cuda() -> None:
+    real, recon = th.randn(2, 4, 3, 224, 224, dtype=th.float32).cuda()
+    loss_fn = CNNLoss(w0=th.ones(()), w1=th.tensor(0.1)).cuda()
+    loss = loss_fn(real, recon)
+    assert loss.ndim == 0
+    assert loss.dtype == th.float32
+    assert th.isfinite(loss)
+    assert loss.device == real.device
+
+
+def test_cnn_loss_forward_pytorch_weights() -> None:
+    real, recon = th.randn(2, 4, 3, 224, 224, dtype=th.float32)
+    loss_fn = CNNLoss(w0=th.ones(()), w1=th.tensor(0.1))
+    loss = loss_fn(real, recon)
+    assert loss.ndim == 0
+    assert loss.dtype == th.float32
+    assert th.isfinite(loss)
+
 def test_cnn_loss_forward_zero_weight() -> None:
     real, recon = th.randn(2, 4, 3, 224, 224, dtype=th.float32)
     loss_fn = CNNLoss(w0=0.0, w1=0.0)

@@ -39,15 +39,15 @@ class CNNLoss(nn.Module):
             if model not in self.VALID_MODELS:
                 raise ValueError(f"Invalid model name {model}, valid models are {self.VALID_MODELS}")
             model = getattr(vmodels, model)(weights="DEFAULT")
-        self.loss_weights = (w0, w1)
+        self.loss_weights = nn.Parameter(th.tensor([w0, w1]), requires_grad=False)
         if self.loss_weights != (0.0, 0.0):
             self._resnet = ResNetSubset(model)
     
     def forward(self, recon: th.Tensor, real) -> th.Tensor:
-        early_loss_w, mid_loss_w = self.loss_weights
-        if early_loss_w == 0.0 and mid_loss_w == 0.0:
+        if self.loss_weights == (0.0, 0.0):
             return th.zeros((), dtype=recon.dtype, device=recon.device, requires_grad=True)
 
+        early_loss_w, mid_loss_w = self.loss_weights
         recon_early_features, recon_mid_features = self._resnet(recon)
         real_early_features, real_mid_features = self._resnet(real)
         
