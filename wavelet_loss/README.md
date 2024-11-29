@@ -32,7 +32,7 @@ device = "cuda" if torch.cuda_is_available() else "cpu"
 # Initialize the Wavelet Loss
 
 
-# Define a WaveletLoss metric, 
+# Define a WaveletLoss metric,
 # initialised to operate over the "haar" frequency bands,   (default : wavelet = "haar")
 # with single-level decomposition,                          (default : level = 1)
 # default loss coefficients,                                (default : w0 = w1 = 1)
