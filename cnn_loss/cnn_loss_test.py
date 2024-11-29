@@ -88,6 +88,22 @@ def test_cnn_loss_forward_weight_ratios() -> None:
     loss_10x = loss_fn_10x(real, recon)
     assert th.allclose(loss_1x * 10.0, loss_10x)
 
+def test_cnn_loss_early_weight_ratios() -> None:
+    real, recon = th.randn(2, 4, 3, 224, 224, dtype=th.float32)
+    loss_fn_1x = CNNLoss(w0=0.1, w1=0.0)
+    loss_fn_10x = CNNLoss(w0=1.0, w1=0.0)
+    loss_1x = loss_fn_1x(real, recon)
+    loss_10x = loss_fn_10x(real, recon)
+    assert th.allclose(loss_1x * 10.0, loss_10x)
+
+def test_cnn_loss_mid_weight_ratios() -> None:
+    real, recon = th.randn(2, 4, 3, 224, 224, dtype=th.float32)
+    loss_fn_1x = CNNLoss(w0=0, w1=0.0)
+    loss_fn_10x = CNNLoss(w0=0, w1=0.0)
+    loss_1x = loss_fn_1x(real, recon)
+    loss_10x = loss_fn_10x(real, recon)
+    assert th.allclose(loss_1x * 10.0, loss_10x)
+
 def test_cnn_loss_forward_early_weight_monotonicity() -> None:
     real, recon = th.randn(2, 4, 3, 224, 224, dtype=th.float32)
     loss_fn_1x = CNNLoss(w0=1.0, w1=1.0)
