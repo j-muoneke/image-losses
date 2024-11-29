@@ -1,3 +1,3 @@
-from .cnn_loss import CNNLoss, ResNetSubset
+from .cnn_loss import CNNLoss
 
-__all__ = ["CNNLoss", "ResNetSubset"]
+__all__ = ["CNNLoss"]
