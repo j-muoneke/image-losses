@@ -25,10 +25,10 @@ class WaveletLoss(nn.Module):
         pred_yl, pred_yh = pred_coeffs
         target_yl, target_yh = target_coeffs
 
-        for pred_coeffs, targte_coeffs in zip(pred_yl, target_yl):
-            total_loss += self.loss_fn(pred_coeffs, targte_coeffs) * self.loss_coeffs[0]
+        for pred_coeffs, target_coeffs in zip(pred_yl, target_yl):
+            total_loss += self.loss_fn(pred_coeffs, target_coeffs) * self.loss_coeffs[0]
 
-        for pred_coeffs, targte_coeffs in zip(pred_yh, target_yh):
-            total_loss += self.loss_fn(pred_coeffs, targte_coeffs) * self.loss_coeffs[1]
+        for pred_coeffs, target_coeffs in zip(pred_yh, target_yh):
+            total_loss += self.loss_fn(pred_coeffs, target_coeffs) * self.loss_coeffs[1]
 
         return total_loss
