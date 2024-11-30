@@ -6,7 +6,7 @@ from pytorch_wavelets import DWTForward
 
 # WaveletLoss (impl. here)
 class WaveletLoss(nn.Module):
-    def __init__(self, wavelet="haar", level=1, loss_fn=nn.MSELoss(), w0=1.0, w1=1.0):
+    def __init__(self, wavelet="haar", level=1, loss_fn=nn.MSELoss(), w0=0.01, w1=0.01):
         super(WaveletLoss, self).__init__()
         self.dwt = DWTForward(J=level, wave=wavelet)  # Wavelet Transform
         self.loss_fn = loss_fn

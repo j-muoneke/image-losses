@@ -46,7 +46,7 @@ class CNNLoss(nn.Module):
         "resnet152",
     ]
 
-    def __init__(self, model: Union[str, nn.Module] = "Resnet18", w0=1.0, w1=0.03) -> None:
+    def __init__(self, model: Union[str, nn.Module] = "Resnet18", w0=1.0, w1=1.0) -> None:
         super().__init__()
         if not isinstance(model, nn.Module):
             model = model.lower()
